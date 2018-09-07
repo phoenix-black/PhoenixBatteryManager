@@ -31,6 +31,7 @@ public class PxBatteryManager {
     private PxBatteryStateListener pxBatteryStateListener;
     private float minimumBatteryThreshold = 0.25f;
     private static float MIN_BATTERY_THRESHOLD = 0.25f;
+    boolean isBatteryReceiverEnabled = false;
 
     public PxBatteryManager(Context context){
         this(context,0.25f);
@@ -46,10 +47,6 @@ public class PxBatteryManager {
     public boolean setBatteryListener(PxBatteryListener batteryListener){
         if(batteryListener!= null) {
             pxBatteryLevelListener = batteryListener;
-            if(pxBatteryStateListener == null) {
-                IntentFilter iFilter = new IntentFilter(Intent.ACTION_BATTERY_CHANGED);
-                _context.registerReceiver(mBroadcastReceiver, iFilter);
-            }
             return true;
         }
         return false;
@@ -66,6 +63,15 @@ public class PxBatteryManager {
             return true;
         }
         return false;
+    }
+
+    public void onResume(){
+        try {
+            IntentFilter iFilter = new IntentFilter(Intent.ACTION_BATTERY_CHANGED);
+            _context.registerReceiver(mBroadcastReceiver, iFilter);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     public void onPause(){

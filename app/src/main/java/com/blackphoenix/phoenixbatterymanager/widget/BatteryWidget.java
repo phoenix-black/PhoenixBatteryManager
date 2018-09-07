@@ -175,6 +175,15 @@ public class BatteryWidget extends RelativeLayout {
         super.onDetachedFromWindow();
     }
 
+    @Override
+    protected void onAttachedToWindow() {
+
+        if(batteryManager!=null){
+            batteryManager.onResume();
+        }
+
+        super.onAttachedToWindow();
+    }
 }
 
    /* public BatteryWidget(Context context, AttributeSet attrs, int defStyleAttr) {
