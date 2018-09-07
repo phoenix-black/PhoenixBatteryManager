@@ -7,6 +7,7 @@ import android.content.IntentFilter;
 import android.os.BatteryManager;
 
 import com.blackphoenix.phoenixbatterymanager.listener.PxBatteryListener;
+import com.blackphoenix.phoenixbatterymanager.listener.PxBatteryStateListener;
 
 
 /**
@@ -26,7 +27,8 @@ public class PxBatteryManager {
     }
 
     private Context _context;
-    private PxBatteryListener pxBatteryListener;
+    private PxBatteryListener pxBatteryLevelListener;
+    private PxBatteryStateListener pxBatteryStateListener;
     private float minimumBatteryThreshold = 0.25f;
     private static float MIN_BATTERY_THRESHOLD = 0.25f;
 
@@ -43,9 +45,24 @@ public class PxBatteryManager {
 
     public boolean setBatteryListener(PxBatteryListener batteryListener){
         if(batteryListener!= null) {
-            pxBatteryListener = batteryListener;
-            IntentFilter iFilter = new IntentFilter(Intent.ACTION_BATTERY_CHANGED);
-            _context.registerReceiver(mBroadcastReceiver, iFilter);
+            pxBatteryLevelListener = batteryListener;
+            if(pxBatteryStateListener == null) {
+                IntentFilter iFilter = new IntentFilter(Intent.ACTION_BATTERY_CHANGED);
+                _context.registerReceiver(mBroadcastReceiver, iFilter);
+            }
+            return true;
+        }
+        return false;
+    }
+
+    public boolean setBatteryStateListener(PxBatteryStateListener batteryListener){
+        if(batteryListener!= null) {
+            pxBatteryStateListener = batteryListener;
+            if(pxBatteryLevelListener == null) {
+                IntentFilter iFilter = new IntentFilter(Intent.ACTION_BATTERY_CHANGED);
+                _context.registerReceiver(mBroadcastReceiver, iFilter);
+            }
+
             return true;
         }
         return false;
@@ -66,9 +83,35 @@ public class PxBatteryManager {
             int level = intent.getIntExtra(BatteryManager.EXTRA_LEVEL, -1);
             float percentage = level / (float) scale;
 
-            if(pxBatteryListener != null){
-                pxBatteryListener.onBatteryLevelChanged(percentage);
+            if(pxBatteryLevelListener != null){
+                pxBatteryLevelListener.onBatteryLevelChanged(percentage);
             }
+
+            int chargeStatus = intent.getIntExtra(BatteryManager.EXTRA_STATUS, -1);
+            int chargePlug =  intent.getIntExtra(BatteryManager.EXTRA_PLUGGED, -1);
+            int chargePlu2g =  intent.getIntExtra(BatteryManager.EXTRA_HEALTH, -1);
+
+            if(pxBatteryStateListener !=null){
+                pxBatteryStateListener.onBatteryLevelChanged(percentage);
+                pxBatteryStateListener.onBatteryChargingStatusChanged(chargeStatus,chargePlug);
+            }
+
+        }
+    };
+
+
+    private BroadcastReceiver mPowerConnectionReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+
+        }
+    };
+
+
+    private BroadcastReceiver mBatterySignificantLevelReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+
         }
     };
 
@@ -135,7 +178,7 @@ public class PxBatteryManager {
         return level / (float)scale;
     }
 
-        public static boolean isBatteryCharging(Context context) throws PxBatteryException {
+    public static boolean isBatteryCharging(Context context) throws PxBatteryException {
         int status = getBatteryChargeStatus(context);
         return  (status == BatteryConfig.STATE.USB_CHARGING
                 || status == BatteryConfig.STATE.AC_CHARGING);

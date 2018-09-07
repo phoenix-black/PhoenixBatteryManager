@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    android:id="@+id/widget_view"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:minHeight="60dp"
+    android:minWidth="60dp"
+    android:focusable="true">
+
+<!--    <TextView
+        android:id="@+id/batterytext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:elevation="3dp"
+        android:maxLines="1"
+        android:shadowColor="@android:color/background_dark"
+        android:shadowDx="3"
+        android:shadowDy="3"
+        android:shadowRadius="4"
+        android:textColor="@android:color/holo_red_dark"
+        android:text="Loading..."
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:typeface="sans"/>-->
+
+
+    <ImageView
+        android:id="@+id/battery_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:visibility="visible"
+        android:src="@drawable/battery_container_neon_512px"/>
+
+    <ImageView
+        android:id="@+id/percent100"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/battery_bar_100_512px"
+        android:visibility="invisible"/>
+
+    <ImageView
+        android:id="@+id/percent90"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/battery_bar_090_512px"
+        android:visibility="invisible"/>
+
+    <ImageView
+        android:id="@+id/percent80"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/battery_bar_080_512px"
+        android:visibility="invisible"/>
+
+    <ImageView
+        android:id="@+id/percent70"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/battery_bar_070_512px"
+        android:visibility="invisible"/>
+
+    <ImageView
+        android:id="@+id/percent60"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/battery_bar_060_512px"
+        android:visibility="visible"/>
+
+    <ImageView
+        android:id="@+id/percent50"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/battery_bar_050_512px"
+        android:visibility="invisible"/>
+
+    <ImageView
+        android:id="@+id/percent40"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/battery_bar_040_orange_512px"
+        android:visibility="invisible"/>
+
+    <ImageView
+        android:id="@+id/percent30"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/battery_bar_030_orange_512px"
+        android:visibility="invisible"/>
+
+    <ImageView
+        android:id="@+id/percent20"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/battery_bar_020_red_512px"
+        android:visibility="invisible"/>
+
+    <ImageView
+        android:id="@+id/percent10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/battery_bar_010_red_512px"
+        android:visibility="invisible"/>
+
+
+    <ImageView
+        android:id="@+id/charge_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/battery_view"
+        android:layout_alignEnd="@+id/battery_view"
+        android:layout_alignStart="@+id/battery_view"
+        android:layout_alignTop="@+id/battery_view"
+        android:src="@drawable/battery_charge_512px"
+        android:visibility="gone"/>
+
+
+
+
+    <TextView
+        android:id="@+id/batterytext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/battery_view"
+        android:layout_alignEnd="@+id/battery_view"
+        android:layout_alignStart="@+id/battery_view"
+        android:layout_alignTop="@+id/battery_view"
+        android:gravity="center|center"
+        android:elevation="3dp"
+        android:maxLines="1"
+        android:shadowColor="@android:color/background_dark"
+        android:shadowDx="3"
+        android:shadowDy="3"
+        android:shadowRadius="4"
+        android:textColor="@android:color/white"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:typeface="sans"/>
+
+</RelativeLayout>
