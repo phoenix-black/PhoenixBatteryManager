@@ -3,7 +3,6 @@ package com.blackphoenix.phoenixbatterymanager.widget;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
@@ -67,10 +66,6 @@ public class BatteryWidget extends RelativeLayout {
             percent100 = findViewById(R.id.percent100);
             batteryContainer = findViewById(R.id.battery_view);
             batteryLabel = findViewById(R.id.batterytext);
-            //  initBatteryStatus(batteryPercent);
-
-            Log.e("Battery Height ",""+getHeight());
-            Log.e("Battery Width ",""+getWidth());
 
             if(getHeight()<60){
                 batteryLabel.setTextSize(14);
@@ -103,10 +98,6 @@ public class BatteryWidget extends RelativeLayout {
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
-        Log.e("Battery Height ",""+h);
-        Log.e("Battery Height Spec",""+MeasureSpec.getSize(h));
-        Log.e("Battery Width ",""+w);
-
         if(h<60){
             batteryLabel.setTextSize(12);
         } else if(h>=60 && h<100){
@@ -128,7 +119,6 @@ public class BatteryWidget extends RelativeLayout {
 
         String batteryPercentString = ""+batteryPercent+"%";
         batteryLabel.setText(batteryPercentString);
-        Log.e("Battery Percent ",""+batteryPercentString);
         if(batteryPercent <=20 && batteryPercent >0){
             batteryContainer.setImageResource(R.drawable.battery_container_red_512px);
         } else if(batteryPercent <=40 && batteryPercent >20) {
@@ -185,13 +175,5 @@ public class BatteryWidget extends RelativeLayout {
         super.onAttachedToWindow();
     }
 }
-
-   /* public BatteryWidget(Context context, AttributeSet attrs, int defStyleAttr) {
-        super(context, attrs, defStyleAttr);
-    }
-
-    public BatteryWidget(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
-        super(context, attrs, defStyleAttr, defStyleRes);
-    }*/
 
 

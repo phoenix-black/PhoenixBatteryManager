@@ -31,38 +31,23 @@ public class PxBatteryManager {
     private PxBatteryStateListener pxBatteryStateListener;
     private float minimumBatteryThreshold = 0.25f;
     private static float MIN_BATTERY_THRESHOLD = 0.25f;
-    boolean isBatteryReceiverEnabled = false;
 
     public PxBatteryManager(Context context){
         this(context,0.25f);
     }
 
     public PxBatteryManager(Context context, float batteryThreshold){
-        // Battery
         _context = context;
         minimumBatteryThreshold = batteryThreshold;
     }
 
 
-    public boolean setBatteryListener(PxBatteryListener batteryListener){
-        if(batteryListener!= null) {
-            pxBatteryLevelListener = batteryListener;
-            return true;
-        }
-        return false;
+    public void setBatteryListener(PxBatteryListener batteryListener){
+        this.pxBatteryLevelListener = batteryListener;
     }
 
-    public boolean setBatteryStateListener(PxBatteryStateListener batteryListener){
-        if(batteryListener!= null) {
-            pxBatteryStateListener = batteryListener;
-            if(pxBatteryLevelListener == null) {
-                IntentFilter iFilter = new IntentFilter(Intent.ACTION_BATTERY_CHANGED);
-                _context.registerReceiver(mBroadcastReceiver, iFilter);
-            }
-
-            return true;
-        }
-        return false;
+    public void setBatteryStateListener(PxBatteryStateListener batteryListener){
+        pxBatteryStateListener = batteryListener;
     }
 
     public void onResume(){
@@ -95,7 +80,7 @@ public class PxBatteryManager {
 
             int chargeStatus = intent.getIntExtra(BatteryManager.EXTRA_STATUS, -1);
             int chargePlug =  intent.getIntExtra(BatteryManager.EXTRA_PLUGGED, -1);
-            int chargePlu2g =  intent.getIntExtra(BatteryManager.EXTRA_HEALTH, -1);
+            int batteryHealth =  intent.getIntExtra(BatteryManager.EXTRA_HEALTH, -1);
 
             if(pxBatteryStateListener !=null){
                 pxBatteryStateListener.onBatteryLevelChanged(percentage);
@@ -216,7 +201,5 @@ public class PxBatteryManager {
         IntentFilter iFilter = new IntentFilter(Intent.ACTION_BATTERY_CHANGED);
         return context.registerReceiver(null, iFilter);
     }
-
-
 
 }

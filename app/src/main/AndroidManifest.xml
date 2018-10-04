@@ -1,9 +1,2 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.blackphoenix.phoenixbatterymanager">
-
-    <application>
-        <activity android:name=".widget.BatteryWidgetActivity"/>
-    </application>
-
-</manifest>
+<manifest package="com.blackphoenix.phoenixbatterymanager"/>
